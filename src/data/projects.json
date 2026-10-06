@@ -124,5 +124,19 @@
     "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
     "accent": "from-lime-400/30 to-green-300/0",
     "summary": "A travel film shot across Patagonia, cut for breath and pace. Hand-held, no narration."
+  },
+  {
+    "id": "my-new-film",
+    "title": "My New Film",
+    "category": "Commercial",
+    "year": "2000",
+    "role": "Infinity",
+    "client": "Atlaay",
+    "duration": "5:45",
+    "span": "wide",
+    "accent": "from-sky-400/30 to-blue-300/0",
+    "summary": "One-line summary",
+    "poster": "/posters/my-new-film.jpg",
+    "src": "/videos/my-new-film.mp4"
   }
 ]
