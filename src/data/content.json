@@ -1,184 +1,185 @@
 {
-  "site": {
-    "name": "Dheeraj Joshi",
-    "role": "Filmmaker & Video Editor",
-    "email": "hello@rahulnegi.studio",
-    "location": "Delhi, IN",
-    "timezone": "Asia/Kolkata",
-    "locationLabel": "Delhi"
-  },
-  "hero": {
-    "headline": {
-      "line1": [
-        "Filmmaker",
-        "&",
-        "video"
-      ],
-      "line2": [
-        "editor",
-        {
-          "text": "crafting stories",
-          "style": "serif-flame"
-        }
-      ],
-      "line3": [
-        {
-          "text": "that",
-          "style": "serif"
-        },
-        "breathe."
-      ]
-    },
-    "bio": "I'm Rahul — a freelance filmmaker & editor based out of Delhi, working with studios and founders worldwide. Stories cut with rhythm, light and intent.",
-    "badge": "Available · Q1 2026",
-    "showreelLabel": "Watch showreel",
-    "showreelTime": "01:42",
-    "tools": [
-      "Premiere Pro",
-      "DaVinci Resolve",
-      "After Effects",
-      "Cinema 4D"
-    ],
-    "estYear": 2016
-  },
-  "about": {
-    "sectionNum": "01 / About",
-    "title": "A few words",
-    "titleAccent": "about me.",
-    "bio1": "I'm a filmmaker & editor obsessed with rhythm, light, and the small moments that make a story breathe. Over the last ten years I've cut campaigns for brands, directed short documentaries and helped founders turn raw footage into stories people share.",
-    "bio2": "When I'm not editing, I'm usually on a flight somewhere remote, reading scripts, or riding my bike very slowly uphill.",
-    "stats": [
-      {
-        "num": 120,
-        "suffix": "+",
-        "label": "Projects shipped"
-      },
-      {
-        "num": 38,
-        "suffix": "",
-        "label": "Awards & mentions"
-      },
-      {
-        "num": 10,
-        "suffix": "y",
-        "label": "Years editing"
-      },
-      {
-        "num": 27,
-        "suffix": "",
-        "label": "Countries filmed"
-      }
-    ]
-  },
-  "marquee": [
-    "Vimeo Staff Picks",
-    "Awwwards SOTD",
-    "FWA",
-    "Indie Shorts",
-    "Cannes Lions",
-    "Wired",
-    "The Verge",
-    "It's Nice That",
-    "Motion Awards"
-  ],
-  "services": [
-    {
-      "num": "01",
-      "title": "Video Editing",
-      "desc": "Story-first cuts for long-form documentaries, brand films and YouTube."
-    },
-    {
-      "num": "02",
-      "title": "Color Grading",
-      "desc": "Cinematic, naturalistic grades in DaVinci Resolve with custom LUTs."
-    },
-    {
-      "num": "03",
-      "title": "Motion Design",
-      "desc": "Type, transitions and 2D animation in After Effects & Cinema 4D."
-    },
-    {
-      "num": "04",
-      "title": "Direction",
-      "desc": "Concept-to-screen creative direction for commercials and short films."
-    },
-    {
-      "num": "05",
-      "title": "Sound & Mix",
-      "desc": "Sound design, dialogue cleanup and final mix in Pro Tools."
-    }
-  ],
-  "testimonials": [
-    {
-      "quote": "He took 40 hours of raw footage and turned it into a film that made us cry. We hired him twice more.",
-      "name": "Elena Vidal",
-      "role": "Founder, Northward Co."
-    },
-    {
-      "quote": "The fastest turn-around in the industry and a final cut that felt like a poem. Genuinely rare.",
-      "name": "Marcus Lee",
-      "role": "Creative Director, Hello Studio"
-    },
-    {
-      "quote": "A rare combination of taste, speed and emotional intelligence on every single project.",
-      "name": "Priya Anand",
-      "role": "Head of Content, Lumen"
-    }
-  ],
-  "navbar": [
-    {
-      "href": "#work",
-      "label": "Work",
-      "num": "01"
-    },
-    {
-      "href": "#about",
-      "label": "About",
-      "num": "02"
-    },
-    {
-      "href": "#services",
-      "label": "Services",
-      "num": "03"
-    },
-    {
-      "href": "#contact",
-      "label": "Contact",
-      "num": "04"
-    }
-  ],
-  "contact": {
-    "sectionNum": "05 / Contact",
-    "intro": "Have an idea?",
-    "headlineAccent": "Let's make",
-    "headlineTail": "it real.",
-    "dropALineLabel": "Drop a line",
-    "emailLabel": "Email",
-    "locationLabel": "Location",
-    "currentlyLabel": "Currently",
-    "currentlyStatus": "Open for Q1 2026",
-    "elsewhereLabel": "Elsewhere. Me, online.",
-    "socials": [
-      {
-        "label": "Vimeo",
-        "href": "#"
-      },
-      {
-        "label": "Instagram",
-        "href": "#"
-      },
-      {
-        "label": "YouTube",
-        "href": "#"
-      },
-      {
-        "label": "X / Twitter",
-        "href": "#"
-      }
-    ]
-  },
-  "footer": {
-    "copyright": "Rahul Negi — all work belongs to its makers.",
-    "backToTop": "Back to top ↑"
-  }
+    "site":  {
+                 "name":  "Dheeraj Joshi",
+                 "role":  "Filmmaker \u0026 Video Editor",
+                 "email":  "hello@rahulnegi.studio",
+                 "location":  "Delhi, IN",
+                 "timezone":  "Asia/Kolkata",
+                 "locationLabel":  "Delhi"
+             },
+    "hero":  {
+                 "headline":  {
+                                  "line1":  [
+                                                "Filmmaker",
+                                                "\u0026",
+                                                "video"
+                                            ],
+                                  "line2":  [
+                                                "editor",
+                                                {
+                                                    "text":  "crafting stories",
+                                                    "style":  "serif-flame"
+                                                }
+                                            ],
+                                  "line3":  [
+                                                {
+                                                    "text":  "that",
+                                                    "style":  "serif"
+                                                },
+                                                "breathe."
+                                            ]
+                              },
+                 "bio":  "I\u0027m Rahul — a freelance filmmaker \u0026 editor based out of Delhi, working with studios and founders worldwide. Stories cut with rhythm, light and intent.",
+                 "badge":  "Available · Q1 2026",
+                 "showreelLabel":  "Watch showreel",
+                 "showreelTime":  "01:42",
+                 "tools":  [
+                               "Premiere Pro",
+                               "DaVinci Resolve",
+                               "After Effects",
+                               "Cinema 4D"
+                           ],
+                 "estYear":  2016
+             },
+    "about":  {
+                  "sectionNum":  "01 / About",
+                  "title":  "A few words",
+                  "titleAccent":  "about me.",
+                  "bio1":  "I\u0027m a filmmaker \u0026 editor obsessed with rhythm, light, and the small moments that make a story breathe. Over the last ten years I\u0027ve cut campaigns for brands, directed short documentaries and helped founders turn raw footage into stories people share.",
+                  "bio2":  "When I\u0027m not editing, I\u0027m usually on a flight somewhere remote, reading scripts, or riding my bike very slowly uphill.",
+                  "stats":  [
+                                {
+                                    "num":  120,
+                                    "suffix":  "+",
+                                    "label":  "Projects shipped"
+                                },
+                                {
+                                    "num":  38,
+                                    "suffix":  "",
+                                    "label":  "Awards \u0026 mentions"
+                                },
+                                {
+                                    "num":  10,
+                                    "suffix":  "y",
+                                    "label":  "Years editing"
+                                },
+                                {
+                                    "num":  27,
+                                    "suffix":  "",
+                                    "label":  "Countries filmed"
+                                }
+                            ]
+              },
+    "marquee":  [
+                    "Vimeo Staff Picks",
+                    "Awwwards SOTD",
+                    "FWA",
+                    "Indie Shorts",
+                    "Cannes Lions",
+                    "Wired",
+                    "The Verge",
+                    "It\u0027s Nice That",
+                    "Motion Awards"
+                ],
+    "services":  [
+                     {
+                         "num":  "01",
+                         "title":  "Video Editing",
+                         "desc":  "Story-first cuts for long-form documentaries, brand films and YouTube."
+                     },
+                     {
+                         "num":  "02",
+                         "title":  "Color Grading",
+                         "desc":  "Cinematic, naturalistic grades in DaVinci Resolve with custom LUTs."
+                     },
+                     {
+                         "num":  "03",
+                         "title":  "Motion Design",
+                         "desc":  "Type, transitions and 2D animation in After Effects \u0026 Cinema 4D."
+                     },
+                     {
+                         "num":  "04",
+                         "title":  "Direction",
+                         "desc":  "Concept-to-screen creative direction for commercials and short films."
+                     },
+                     {
+                         "num":  "05",
+                         "title":  "Sound \u0026 Mix",
+                         "desc":  "Sound design, dialogue cleanup and final mix in Pro Tools."
+                     }
+                 ],
+    "testimonials":  [
+                         {
+                             "quote":  "He took 40 hours of raw footage and turned it into a film that made us cry. We hired him twice more.",
+                             "name":  "Elena Vidal",
+                             "role":  "Founder, Northward Co."
+                         },
+                         {
+                             "quote":  "The fastest turn-around in the industry and a final cut that felt like a poem. Genuinely rare.",
+                             "name":  "Marcus Lee",
+                             "role":  "Creative Director, Hello Studio"
+                         },
+                         {
+                             "quote":  "A rare combination of taste, speed and emotional intelligence on every single project.",
+                             "name":  "Priya Anand",
+                             "role":  "Head of Content, Lumen"
+                         }
+                     ],
+    "navbar":  [
+                   {
+                       "href":  "#work",
+                       "label":  "Work",
+                       "num":  "01"
+                   },
+                   {
+                       "href":  "#about",
+                       "label":  "About",
+                       "num":  "02"
+                   },
+                   {
+                       "href":  "#services",
+                       "label":  "Services",
+                       "num":  "03"
+                   },
+                   {
+                       "href":  "#contact",
+                       "label":  "Contact",
+                       "num":  "04"
+                   }
+               ],
+    "contact":  {
+                    "sectionNum":  "05 / Contact",
+                    "intro":  "Have an idea?",
+                    "headlineAccent":  "Let\u0027s make",
+                    "headlineTail":  "it real.",
+                    "dropALineLabel":  "Drop a line",
+                    "emailLabel":  "Email",
+                    "locationLabel":  "Location",
+                    "currentlyLabel":  "Currently",
+                    "currentlyStatus":  "Open for Q1 2026",
+                    "elsewhereLabel":  "Elsewhere. Me, online.",
+                    "socials":  [
+                                    {
+                                        "label":  "Vimeo",
+                                        "href":  "#"
+                                    },
+                                    {
+                                        "label":  "Instagram",
+                                        "href":  "#"
+                                    },
+                                    {
+                                        "label":  "YouTube",
+                                        "href":  "#"
+                                    },
+                                    {
+                                        "label":  "X / Twitter",
+                                        "href":  "#"
+                                    }
+                                ]
+                },
+    "footer":  {
+                   "copyright":  "Rahul Negi — all work belongs to its makers.",
+                   "backToTop":  "Back to top ↑"
+               },
+    "_deploy":  "2026-10-06T15:28:30Z"
 }
