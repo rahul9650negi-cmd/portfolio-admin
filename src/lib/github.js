@@ -161,6 +161,7 @@ export const DEFAULT_GH_CONFIG = {
   token: "",
   contentPath: "src/data/content.json",
   projectsPath: "src/data/projects.json",
+  deployHookUrl: "",
 };
 
 export function loadGhConfig() {
@@ -179,4 +180,21 @@ export function saveGhConfig(cfg) {
 
 export function clearGhConfig() {
   localStorage.removeItem(KEY);
+}
+
+// ---- Netlify deploy hook ----
+// Pings Netlify's "incoming webhook" to trigger a fresh build after
+// the form has committed to GitHub. Without this, the deployed site
+// shows stale data until the next manual rebuild.
+//
+// Setup: Netlify → Site → Build & deploy → Build hooks → Add hook
+//   → copy the URL (looks like https://api.netlify.com/build_hooks/abc123)
+//   → paste in the form's Settings tab
+export async function triggerNetlifyDeploy(hookUrl) {
+  if (!hookUrl) throw new Error("Netlify deploy hook URL is required");
+  const res = await fetch(hookUrl, { method: "POST" });
+  if (!res.ok) {
+    throw new Error(`Netlify hook ${res.status}: ${res.statusText}`);
+  }
+  return true;
 }

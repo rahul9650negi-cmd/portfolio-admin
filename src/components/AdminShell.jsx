@@ -13,7 +13,7 @@ import ContactTab from "./admin/ContactTab";
 import NavbarTab from "./admin/NavbarTab";
 import SettingsTab from "./admin/SettingsTab";
 
-import { loadGhConfig, readFile, writeFile } from "../lib/github";
+import { loadGhConfig, readFile, writeFile, triggerNetlifyDeploy } from "../lib/github";
 import { useTheme } from "../context/ThemeContext";
 import initialContent from "../data/content.json";
 import initialProjects from "../data/projects.json";
@@ -69,6 +69,9 @@ export default function AdminShell({ onExit }) {
   const [save, setSave] = useState({ status: "idle", msg: "" });
   const [draft, setDraft] = useState(loadDraft());
   const dirty = useRef(false);
+
+  // Keep ghConfig in sync if it changes from another source
+  useEffect(() => setGhConfig(loadGhConfig()), []);
 
   // ---- Detect mode (dev vs github) ----
   useEffect(() => {
@@ -170,7 +173,13 @@ export default function AdminShell({ onExit }) {
       clearDraft();
       setDraft(null);
       dirty.current = false;
-      setSave({ status: "success", msg: "Content saved. Reloading…" });
+      setSave({ status: "success", msg: "Content saved. Netlify deploying…" });
+      // Fire Netlify deploy hook (if configured) so the live site updates
+      if (ghConfig.deployHookUrl) {
+        triggerNetlifyDeploy(ghConfig.deployHookUrl).catch((e) =>
+          console.warn("Netlify deploy hook failed:", e.message)
+        );
+      }
       setTimeout(() => window.location.reload(), 800);
     } catch (err) {
       setSave({ status: "error", msg: err.message || "Save failed" });

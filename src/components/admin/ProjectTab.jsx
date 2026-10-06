@@ -10,7 +10,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Field, Input, Textarea, Select } from "./adminUtils";
-import { readFile, writeFile, deleteFile, upsertFile } from "../../lib/github";
+import { readFile, writeFile, deleteFile, upsertFile, triggerNetlifyDeploy } from "../../lib/github";
 
 const CATEGORIES = [
   "Brand Film",
@@ -239,6 +239,12 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
         });
         onProjectsChange?.([...projects, newEntry]);
         setSuccess({ id, mode: "github" });
+        // Fire Netlify deploy hook (if configured) so the live site updates
+        if (ghConfig.deployHookUrl) {
+          triggerNetlifyDeploy(ghConfig.deployHookUrl).catch((e) =>
+            console.warn("Netlify deploy hook failed:", e.message)
+          );
+        }
       }
 
       // Reset form
@@ -286,6 +292,7 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
           mode: "dev",
           msg: `Deleted "${project?.title}"${deleteFiles ? " (+files)" : ""}.`,
         });
+        setConfirmDelete(null);
       } else {
         if (!ghConfig?.token) throw new Error("Configure GitHub in Settings first");
         // 1. Read current projects.json
@@ -361,8 +368,14 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
           mode: "github",
           msg: `Deleted "${project?.title}"${deleteFiles ? " (+files)" : ""}. Site will redeploy in 30s–2min.`,
         });
+        setConfirmDelete(null);
+        // Fire Netlify deploy hook (if configured) so the live site updates
+        if (ghConfig.deployHookUrl) {
+          triggerNetlifyDeploy(ghConfig.deployHookUrl).catch((e) =>
+            console.warn("Netlify deploy hook failed:", e.message)
+          );
+        }
       }
-      setConfirmDelete(null);
     } catch (err) {
       setError(`Delete failed: ${err.message}`);
     } finally {
