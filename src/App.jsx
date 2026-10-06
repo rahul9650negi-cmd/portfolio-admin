@@ -58,9 +58,9 @@ function App() {
     return (
       <ThemeProvider>
         <UIProvider>
-          <div className="min-h-screen bg-ink text-bone">
-            <Admin onExit={exitAdmin} />
-          </div>
+          {/* No wrapper div with hardcoded colors — let the body
+              theme (set by ThemeContext) drive the admin background. */}
+          <Admin onExit={exitAdmin} />
         </UIProvider>
       </ThemeProvider>
     );

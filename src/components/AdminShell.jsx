@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, AlertCircle, Loader2, Save, FileEdit, RotateCcw, Trash2 } from "lucide-react";
+import { X, Check, AlertCircle, Loader2, Save, FileEdit, RotateCcw, Trash2, Moon, Sun } from "lucide-react";
 
 import ProjectTab from "./admin/ProjectTab";
 import SiteTab from "./admin/SiteTab";
@@ -14,6 +14,7 @@ import NavbarTab from "./admin/NavbarTab";
 import SettingsTab from "./admin/SettingsTab";
 
 import { loadGhConfig, readFile, writeFile } from "../lib/github";
+import { useTheme } from "../context/ThemeContext";
 import initialContent from "../data/content.json";
 import initialProjects from "../data/projects.json";
 
@@ -58,6 +59,7 @@ function clearDraft() {
 }
 
 export default function AdminShell({ onExit }) {
+  const { theme, toggle: toggleTheme } = useTheme();
   const [active, setActive] = useState("site");
   const [data, setData] = useState(initialContent);
   const [projects, setProjects] = useState(initialProjects);
@@ -244,6 +246,19 @@ export default function AdminShell({ onExit }) {
                 </button>
               </>
             )}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              data-hover
+              className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full border border-current/30 bg-current/5 transition-colors hover:border-flame/60 hover:bg-current/10"
+            >
+              <span className="col-start-1 row-start-1 transition-all duration-500 ease-out-expo dark:translate-y-0 translate-y-9">
+                <Moon size={16} />
+              </span>
+              <span className="col-start-1 row-start-1 transition-all duration-500 ease-out-expo dark:-translate-y-9 translate-y-0">
+                <Sun size={16} />
+              </span>
+            </button>
             <button
               onClick={onExit}
               data-hover
