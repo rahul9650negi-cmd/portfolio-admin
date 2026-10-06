@@ -10,7 +10,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Field, Input, Textarea, Select } from "./adminUtils";
-import { readFile, writeFile, deleteFile } from "../../lib/github";
+import { readFile, writeFile, deleteFile, upsertFile } from "../../lib/github";
 
 const CATEGORIES = [
   "Brand Film",
@@ -155,7 +155,9 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
         onProjectsChange?.([...projects, data.project]);
         setSuccess({ id: data.project.id, mode: "dev" });
       } else {
-        // GitHub mode
+        // GitHub mode — atomic: upload both files first, then commit
+        // projects.json. If anything fails, we surface a clear error and
+        // skip the project commit so the repo doesn't get an empty entry.
         if (!ghConfig?.token) throw new Error("Configure GitHub in Settings first");
         const { content: currentJson, sha } = await readFile({
           owner: ghConfig.owner,
@@ -168,42 +170,61 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
         if (arr.some((p) => p.id === id)) {
           throw new Error(`A project with id "${id}" already exists in the repo`);
         }
-        // Upload video
+
+        // Upload video (atomic: if this throws, we abort before committing)
+        const videoName = `${id}.${(videoFile.name.split(".").pop() || "mp4").toLowerCase()}`;
+        let uploadedVideoSha;
         try {
-          const videoName = `${id}.${(videoFile.name.split(".").pop() || "mp4").toLowerCase()}`;
-          await writeFile({
+          const res = await upsertFile({
             owner: ghConfig.owner,
             repo: ghConfig.repo,
             path: `public/videos/${videoName}`,
             content: await fileToBase64GitHub(videoFile),
-            message: `Add video: ${form.title}`,
+            message: `Upload video: ${form.title}`,
             branch: ghConfig.branch,
             token: ghConfig.token,
           });
+          uploadedVideoSha = res.content?.sha;
           newEntry.src = `/videos/${videoName}`;
         } catch (e) {
-          setError(`Video upload failed (${e.message}). Project added with empty src.`);
+          throw new Error(
+            `Video upload failed: ${e.message}. Project NOT committed — try again.`
+          );
         }
+
         // Upload poster
+        const posterName = `${id}.${(posterFile.name.split(".").pop() || "jpg").toLowerCase()}`;
         try {
-          const posterName = `${id}.${(posterFile.name.split(".").pop() || "jpg").toLowerCase()}`;
-          await writeFile({
+          await upsertFile({
             owner: ghConfig.owner,
             repo: ghConfig.repo,
             path: `public/posters/${posterName}`,
             content: await fileToBase64GitHub(posterFile),
-            message: `Add poster: ${form.title}`,
+            message: `Upload poster: ${form.title}`,
             branch: ghConfig.branch,
             token: ghConfig.token,
           });
           newEntry.poster = `/posters/${posterName}`;
         } catch (e) {
-          setError((prev) =>
-            prev
-              ? prev + ` Poster upload failed (${e.message}).`
-              : `Poster upload failed (${e.message}). Project added with empty poster.`
+          // Poster failed after video succeeded — roll back the video
+          try {
+            if (uploadedVideoSha) {
+              await deleteFile({
+                owner: ghConfig.owner,
+                repo: ghConfig.repo,
+                path: `public/videos/${videoName}`,
+                sha: uploadedVideoSha,
+                message: `Rollback video (poster upload failed)`,
+                branch: ghConfig.branch,
+                token: ghConfig.token,
+              });
+            }
+          } catch {}
+          throw new Error(
+            `Poster upload failed: ${e.message}. Video rolled back, project NOT committed.`
           );
         }
+
         // Commit updated projects.json
         arr.push(newEntry);
         await writeFile({

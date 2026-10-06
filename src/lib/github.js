@@ -73,6 +73,39 @@ export async function writeFile({
   return await res.json();
 }
 
+// ---- Upsert a file (create or update) ----
+// Looks up the current SHA first; passes it to writeFile if the file
+// already exists. Throws on network/API errors. Useful when a user
+// retries an upload of the same project.
+export async function upsertFile({
+  owner,
+  repo,
+  path,
+  content,
+  message,
+  branch,
+  token,
+}) {
+  let sha;
+  try {
+    const existing = await readFile({ owner, repo, path, branch, token });
+    sha = existing.sha;
+  } catch (e) {
+    // 404 means file doesn't exist yet — that's fine, we create it
+    if (!/404/.test(e.message)) throw e;
+  }
+  return writeFile({
+    owner,
+    repo,
+    path,
+    content,
+    sha,
+    message: message || (sha ? `Update ${path}` : `Add ${path}`),
+    branch,
+    token,
+  });
+}
+
 // ---- Delete a file from the repo ----
 // Requires the file's current SHA (use readFile first to get it).
 export async function deleteFile({
