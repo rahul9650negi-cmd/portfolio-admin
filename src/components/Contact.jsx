@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin } from "lucide-react";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 export default function Contact() {
+  const { content } = useContent();
   const c = content.contact;
   const { email, location } = content.site;
   return (

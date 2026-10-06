@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 export default function Services() {
+  const { content } = useContent();
   const services = content.services;
   return (
     <section id="services" className="section border-t border-current/15">

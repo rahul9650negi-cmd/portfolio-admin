@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useUI } from "../context/UIContext";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 const links = content.navbar;
 

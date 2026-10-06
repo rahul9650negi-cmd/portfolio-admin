@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Field, Input, Textarea, Select } from "./adminUtils";
 import { readFile, writeFile, deleteFile, upsertFile, triggerNetlifyDeploy } from "../../lib/github";
+import { useContent } from "../../context/ContentContext";
 
 const CATEGORIES = [
   "Brand Film",
@@ -62,6 +63,7 @@ function slugify(text) {
 }
 
 export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange }) {
+  const ctx = useContent();
   const [form, setForm] = useState({
     title: "",
     category: "Brand Film",
@@ -238,6 +240,7 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
           token: ghConfig.token,
         });
         onProjectsChange?.([...projects, newEntry]);
+        ctx.optimisticAddProject(newEntry);
         setSuccess({ id, mode: "github" });
         // Fire Netlify deploy hook (if configured) so the live site updates
         if (ghConfig.deployHookUrl) {
@@ -287,6 +290,7 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
         onProjectsChange?.(projects.filter((p) => p.id !== id));
+        ctx.optimisticRemoveProject(id);
         setSuccess({
           id,
           mode: "dev",
@@ -363,6 +367,7 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
           }
         }
         onProjectsChange?.(projects.filter((p) => p.id !== id));
+        ctx.optimisticRemoveProject(id);
         setSuccess({
           id,
           mode: "github",

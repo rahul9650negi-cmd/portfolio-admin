@@ -1,6 +1,7 @@
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 export default function Marquee() {
+  const { content } = useContent();
   const items = [...content.marquee, ...content.marquee];
   return (
     <section

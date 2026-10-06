@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { UIProvider } from "./context/UIContext";
+import { ContentProvider, useContent } from "./context/ContentContext";
 import SmoothScroll from "./components/SmoothScroll";
 import Cursor from "./components/Cursor";
 import Loader from "./components/Loader";
@@ -69,26 +70,28 @@ function App() {
   return (
     <ThemeProvider>
       <UIProvider>
-        <SmoothScroll>
-          <div className="relative isolate">
-            <div className="grain" aria-hidden="true" />
-            <Cursor />
-            <Loader />
-            <Navbar />
+        <ContentProvider>
+          <SmoothScroll>
+            <div className="relative isolate">
+              <div className="grain" aria-hidden="true" />
+              <Cursor />
+              <Loader />
+              <Navbar />
 
-            <main className="relative z-10">
-              <Hero />
-              <Marquee />
-              <About />
-              <Projects />
-              <Services />
-              <Testimonials />
-              <Contact />
-            </main>
+              <main className="relative z-10">
+                <Hero />
+                <Marquee />
+                <About />
+                <Projects />
+                <Services />
+                <Testimonials />
+                <Contact />
+              </main>
 
-            <Footer />
-          </div>
-        </SmoothScroll>
+              <Footer />
+            </div>
+          </SmoothScroll>
+        </ContentProvider>
       </UIProvider>
     </ThemeProvider>
   );

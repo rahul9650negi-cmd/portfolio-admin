@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 export default function Testimonials() {
+  const { content } = useContent();
   const testimonials = content.testimonials;
   return (
     <section className="section">

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 export default function Footer() {
+  const { content } = useContent();
   const { name, timezone, locationLabel } = content.site;
   const [t1, setT1] = useState("");
   useEffect(() => {

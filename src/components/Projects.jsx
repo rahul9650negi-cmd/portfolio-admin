@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { Play, Pause, ArrowUpRight } from "lucide-react";
-import projectsData from "../data/projects.json";
 import VideoLightbox from "./VideoLightbox";
 import { useUI } from "../context/UIContext";
+import { useContent } from "../context/ContentContext";
 
 function useLazyVideo(src, poster, rootMargin = "200px") {
   const ref = useRef(null);
@@ -232,6 +232,7 @@ function ProjectCard({ project, index, onOpen }) {
 export default function Projects() {
   const [active, setActive] = useState(null);
   const { setModalOpen } = useUI();
+  const { projects: projectsData } = useContent();
 
   // Open + close are atomic with navbar hide/show — no flash
   const openProject = useCallback(

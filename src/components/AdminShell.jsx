@@ -15,8 +15,7 @@ import SettingsTab from "./admin/SettingsTab";
 
 import { loadGhConfig, readFile, writeFile, triggerNetlifyDeploy } from "../lib/github";
 import { useTheme } from "../context/ThemeContext";
-import initialContent from "../data/content.json";
-import initialProjects from "../data/projects.json";
+import { useContent } from "../context/ContentContext";
 
 const TABS = [
   { id: "projects",     label: "Projects",     num: "01" },
@@ -60,15 +59,24 @@ function clearDraft() {
 
 export default function AdminShell({ onExit }) {
   const { theme, toggle: toggleTheme } = useTheme();
+  const ctx = useContent();
   const [active, setActive] = useState("site");
-  const [data, setData] = useState(initialContent);
-  const [projects, setProjects] = useState(initialProjects);
+  // The form's working copy of the data — initialized from the
+  // shared context, edited in place, then saved back to the context
+  // (which writes through to GitHub and updates the live site).
+  const [data, setData] = useState(ctx.content);
+  const [projects, setProjects] = useState(ctx.projects);
   const [mode, setMode] = useState("auto");
   const [resolvedMode, setResolvedMode] = useState("dev");
   const [ghConfig, setGhConfig] = useState(loadGhConfig());
   const [save, setSave] = useState({ status: "idle", msg: "" });
   const [draft, setDraft] = useState(loadDraft());
   const dirty = useRef(false);
+
+  // Keep working copy in sync if context data changes from outside
+  // (e.g. after a refresh, or if another tab updates the cache).
+  useEffect(() => setData(ctx.content), [ctx.content]);
+  useEffect(() => setProjects(ctx.projects), [ctx.projects]);
 
   // Keep ghConfig in sync if it changes from another source
   useEffect(() => setGhConfig(loadGhConfig()), []);
@@ -173,14 +181,17 @@ export default function AdminShell({ onExit }) {
       clearDraft();
       setDraft(null);
       dirty.current = false;
-      setSave({ status: "success", msg: "Content saved. Netlify deploying…" });
+      // Refresh the shared context so every component sees the new data.
+      // The next page load will fetch fresh from GitHub automatically.
+      await ctx.refresh();
+      setData(ctx.content);
+      setSave({ status: "success", msg: "Content saved. Live site updated." });
       // Fire Netlify deploy hook (if configured) so the live site updates
       if (ghConfig.deployHookUrl) {
         triggerNetlifyDeploy(ghConfig.deployHookUrl).catch((e) =>
           console.warn("Netlify deploy hook failed:", e.message)
         );
       }
-      setTimeout(() => window.location.reload(), 800);
     } catch (err) {
       setSave({ status: "error", msg: err.message || "Save failed" });
     }

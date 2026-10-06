@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowDown, Play, Sparkles } from "lucide-react";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 const lineVariants = {
   hidden: {},
@@ -52,8 +52,7 @@ function Words({ words, className = "" }) {
   );
 }
 
-function LocalTime() {
-  const { locationLabel, timezone } = content.site;
+function LocalTime({ timezone, locationLabel }) {
   const [t, setT] = useState("");
   useEffect(() => {
     const update = () => {
@@ -80,6 +79,7 @@ function LocalTime() {
 }
 
 export default function Hero() {
+  const { content } = useContent();
   const h = content.hero;
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 md:pt-36">
@@ -105,7 +105,10 @@ export default function Hero() {
             </span>
             <span className="eyebrow">{h.badge}</span>
           </span>
-          <LocalTime />
+          <LocalTime
+            timezone={content.site.timezone}
+            locationLabel={content.site.locationLabel}
+          />
         </motion.div>
 
         <h1 className="h-display text-balance text-[12vw] leading-[0.92] md:text-[8.5vw] lg:text-[7.6vw]">

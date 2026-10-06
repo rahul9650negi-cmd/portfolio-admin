@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import content from "../data/content.json";
+import { useContent } from "../context/ContentContext";
 
 function Counter({ to, suffix = "", delay = 0, duration = 2200 }) {
   const ref = useRef(null);
@@ -40,6 +40,7 @@ function Counter({ to, suffix = "", delay = 0, duration = 2200 }) {
 }
 
 export default function About() {
+  const { content } = useContent();
   const a = content.about;
   return (
     <section id="about" className="section">
