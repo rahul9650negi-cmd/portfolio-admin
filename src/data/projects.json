@@ -124,19 +124,5 @@
     "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
     "accent": "from-lime-400/30 to-green-300/0",
     "summary": "A travel film shot across Patagonia, cut for breath and pace. Hand-held, no narration."
-  },
-  {
-    "id": "nature",
-    "title": "Nature",
-    "category": "Travel Film",
-    "year": "2000",
-    "role": "Director - Infinity",
-    "client": "Atlaaya",
-    "duration": "5:40",
-    "span": "wide",
-    "accent": "from-sky-400/30 to-blue-300/0",
-    "summary": "One-line summary",
-    "poster": "/posters/nature.jpg",
-    "src": "/videos/nature.mp4"
   }
 ]
