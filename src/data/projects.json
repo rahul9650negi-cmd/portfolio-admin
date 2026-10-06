@@ -138,5 +138,19 @@
     "src": "",
     "accent": "from-cyan-400/30 to-sky-300/0",
     "summary": "Restored."
+  },
+  {
+    "id": "my-new-film",
+    "title": "My New Film",
+    "category": "Documentary",
+    "year": "2000",
+    "role": "Director - Infinity",
+    "client": "Atlaay",
+    "duration": "5:40",
+    "span": "wide",
+    "accent": "from-rose-400/30 to-red-300/0",
+    "summary": "A cinematic shoot...",
+    "poster": "/posters/my-new-film.jpg",
+    "src": "/videos/my-new-film.mp4"
   }
 ]
