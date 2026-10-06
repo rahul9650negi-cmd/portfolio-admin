@@ -13,6 +13,13 @@ import { Field, Input, Textarea, Select } from "./adminUtils";
 import { readFile, writeFile, deleteFile, upsertFile, triggerNetlifyDeploy } from "../../lib/github";
 import { useContent } from "../../context/ContentContext";
 
+// Build a jsDelivr CDN URL for a file in the repo's public/ folder.
+// This works because the repo is now public. jsDelivr caches and serves
+// from their global CDN — no Netlify rebuild needed.
+function cdnUrl(owner, repo, branch, publicPath) {
+  return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${publicPath}`;
+}
+
 const CATEGORIES = [
   "Brand Film",
   "Documentary",
@@ -187,7 +194,12 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
             token: ghConfig.token,
           });
           uploadedVideoSha = res.content?.sha;
-          newEntry.src = `/videos/${videoName}`;
+          newEntry.src = cdnUrl(
+            ghConfig.owner,
+            ghConfig.repo,
+            ghConfig.branch,
+            `public/videos/${videoName}`
+          );
         } catch (e) {
           throw new Error(
             `Video upload failed: ${e.message}. Project NOT committed — try again.`
@@ -206,7 +218,12 @@ export default function ProjectTab({ mode, ghConfig, projects, onProjectsChange 
             branch: ghConfig.branch,
             token: ghConfig.token,
           });
-          newEntry.poster = `/posters/${posterName}`;
+          newEntry.poster = cdnUrl(
+            ghConfig.owner,
+            ghConfig.repo,
+            ghConfig.branch,
+            `public/posters/${posterName}`
+          );
         } catch (e) {
           // Poster failed after video succeeded — roll back the video
           try {
