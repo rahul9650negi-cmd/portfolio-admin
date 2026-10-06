@@ -124,19 +124,5 @@
     "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
     "accent": "from-lime-400/30 to-green-300/0",
     "summary": "A travel film shot across Patagonia, cut for breath and pace. Hand-held, no narration."
-  },
-  {
-    "id": "soft-machinery",
-    "title": "Soft Machinery",
-    "category": "Brand Film",
-    "year": "2024",
-    "role": "",
-    "client": "Lumen Labs",
-    "duration": "",
-    "span": "",
-    "poster": "",
-    "src": "",
-    "accent": "from-cyan-400/30 to-sky-300/0",
-    "summary": "Restored."
   }
 ]
