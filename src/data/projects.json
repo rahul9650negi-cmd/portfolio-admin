@@ -138,5 +138,19 @@
     "src": "",
     "accent": "from-cyan-400/30 to-sky-300/0",
     "summary": "Restored."
+  },
+  {
+    "id": "my-new-film",
+    "title": "My new Film",
+    "category": "Brand Film",
+    "year": "2026",
+    "role": "Director - Editor",
+    "client": "Atlaaya Studio",
+    "duration": "5:40",
+    "span": "wide",
+    "accent": "from-sky-400/30 to-blue-300/0",
+    "summary": "A cinematic brand shot across...",
+    "poster": "",
+    "src": "/videos/my-new-film.mp4"
   }
 ]
