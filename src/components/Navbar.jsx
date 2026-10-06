@@ -5,9 +5,9 @@ import { useTheme } from "../context/ThemeContext";
 import { useUI } from "../context/UIContext";
 import { useContent } from "../context/ContentContext";
 
-const links = content.navbar;
-
 export default function Navbar() {
+  const { content } = useContent();
+  const links = content.navbar;
   const { theme, toggle } = useTheme();
   const { modalOpen } = useUI();
   const [scrolled, setScrolled] = useState(false);
